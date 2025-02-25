@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv("yellow_tripdata_2024-01.csv")
 
+df = pd.read_csv("D:/stuff/Stuff/Task 1/yellow_tripdata_2024-01.csv")
 # 1
 df_split=df['tpep_pickup_datetime'].str.split(' ',expand=True)
 df['pickup_Weekday']=df_split[0]
