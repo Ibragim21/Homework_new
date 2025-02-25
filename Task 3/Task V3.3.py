@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt # pip install matplotlib
 import seaborn as sns # pip install seaborn
 
 # Load the dataset from github
-df = pd.read_csv("https://raw.githubusercontent.com/Ibragim21/Homework_new/refs/heads/main/FIFA17_official_data.csv")
+url="https://media.githubusercontent.com/media/Ibragim21/Stuff/refs/heads/main/Task%203/FIFA17_official_data.csv"
+df = pd.read_csv(url)
 
 # Level 1: Basic Data Handling
 
