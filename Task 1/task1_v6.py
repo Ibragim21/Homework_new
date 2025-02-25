@@ -1,33 +1,47 @@
 import pandas as pd
 import numpy as np
 
-# Define a function to process each chunk
-def process_chunk(chunk):
-    df_split = chunk['tpep_pickup_datetime'].str.split(' ', expand=True)
-    chunk['pickup_Weekday'] = df_split[0]
-    chunk['pickup_day'] = df_split[2]
-    chunk['pickup_month'] = df_split[1]
-    chunk['pickup_hour'] = df_split[3]
-    chunk['pickup_UTC'] = df_split[4]
-    chunk['pickup_time'] = chunk['pickup_hour'] + ' ' + chunk['pickup_UTC']
-    chunk['pickup_year'] = df_split[5]
+# Load the dataset from the provided link
+df = pd.read_csv("https://media.githubusercontent.com/media/Ibragim21/Stuff/refs/heads/main/Task%201/yellow_tripdata_2024-01.csv", nrows=10000) 
 
-    df_split = chunk['tpep_dropoff_datetime'].str.split(' ', expand=True)
-    chunk['dropoff_Weekday'] = df_split[0]
-    chunk['dropoff_day'] = df_split[2]
-    chunk['dropoff_month'] = df_split[1]
-    chunk['dropoff_hour'] = df_split[3]
-    chunk['dropoff_UTC'] = df_split[4]
-    chunk['dropoff_time'] = chunk['dropoff_hour'] + ' ' + chunk['dropoff_UTC']
-    chunk['dropoff_year'] = df_split[5]
+dtype = {
+    'VendorID': 'int8',
+    'passenger_count': 'int8',
+    'trip_distance': 'float32',
+    'RatecodeID': 'int8',
+    'store_and_fwd_flag': 'category',
+    'PULocationID': 'int16',
+    'DOLocationID': 'int16',
+    'payment_type': 'int8',
+    'fare_amount': 'float32',
+    'extra': 'float32',
+    'mta_tax': 'float32',
+    'tip_amount': 'float32',
+    'tolls_amount': 'float32',
+    'improvement_surcharge': 'float32',
+    'total_amount': 'float32',
+    'congestion_surcharge': 'float32',
+    'Airport_fee': 'float32'
+}
 
-    return chunk
+# 1
+df_split = df['tpep_pickup_datetime'].str.split(' ', expand=True)
+df['pickup_Weekday'] = df_split[0]
+df['pickup_day'] = df_split[2]
+df['pickup_month'] = df_split[1]
+df['pickup_hour'] = df_split[3]
+df['pickup_UTC'] = df_split[4]
+df['pickup_time'] = df['pickup_hour'] + ' ' + df['pickup_UTC']
+df['pickup_year'] = df_split[5]
 
-# Load the dataset in chunks
-chunks = pd.read_csv("https://media.githubusercontent.com/media/Ibragim21/Stuff/refs/heads/main/Task%201/yellow_tripdata_2024-01.csv", chunksize=10000)
-
-# Process each chunk and concatenate the results
-df = pd.concat([process_chunk(chunk) for chunk in chunks])
+df_split = df['tpep_dropoff_datetime'].str.split(' ', expand=True)
+df['dropoff_Weekday'] = df_split[0]
+df['dropoff_day'] = df_split[2]
+df['dropoff_month'] = df_split[1]
+df['dropoff_hour'] = df_split[3]
+df['dropoff_UTC'] = df_split[4]
+df['dropoff_time'] = df['dropoff_hour'] + ' ' + df['dropoff_UTC']
+df['dropoff_year'] = df_split[5]
 
 # 2
 numerical_columns = ['trip_distance', 'fare_amount', 'tip_amount', 'total_amount']
