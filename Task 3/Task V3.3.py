@@ -104,3 +104,5 @@ plt.show() # Scatter plot of Pace vs Dribbling
 
 correlation = df['SprintSpeed'].corr(df['Dribbling'])
 print('Correlation between Pace and Dribbling:', correlation) # Correlation between Pace and Dribbling
+
+df.to_csv('FIFA17_official_data_modified.csv', index=False) # Save the modified dataset to a new CSV file

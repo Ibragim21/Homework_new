@@ -10,7 +10,7 @@ cnxn=pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server}; \
 cursor=cnxn.cursor()
 
 def show_menu():
-    print('CHOOSE OPTIONS\n' '   1: Register user\n''   2: Show Books\n''   3: Show book details\n''   4: UPDATE NOTE\n''   5: DELETE NOTE\n''   Q: QUIT THE APPLICATION\n''   M:SHOW MENU')
+    print('CHOOSE OPTIONS\n' '   1: Register user\n''   2: Show Books\n''   3: Show book details\n''   5: User details\n''   Q: QUIT THE APPLICATION\n''   M:SHOW MENU')
 
 
 
