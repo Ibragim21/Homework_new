@@ -8,6 +8,21 @@ import seaborn as sns # pip install seaborn
 url="https://media.githubusercontent.com/media/Ibragim21/Stuff/refs/heads/main/Task%203/FIFA17_official_data.csv"
 df = pd.read_csv(url)
 
+# Function to convert value to numerical type
+def convert_value(value):
+    value = value.replace('€', '')
+    if 'M' in value:
+        return float(value.replace('M', '')) * 1e6
+    elif 'K' in value:
+        return float(value.replace('K', '')) * 1e3
+    return float(value)
+
+# Apply the conversion function to the 'Value' column
+df['Value'] = df['Value'].apply(convert_value)
+
+# Verify the conversion
+print(df['Value'].head())
+
 # Level 1: Basic Data Handling
 
 print(df.head())
